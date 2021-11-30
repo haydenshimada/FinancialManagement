@@ -7,8 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -24,7 +22,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class FinancialController implements Initializable {
@@ -118,7 +115,7 @@ public class FinancialController implements Initializable {
         fade.setFromValue(1.0);
         fade.setToValue(0.0);
         fade.play();
-        blackPane.setVisible(false);
+        fade.setOnFinished(e -> blackPane.setVisible(false));
 
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.5));

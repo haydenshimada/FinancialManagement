@@ -21,7 +21,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0">
                      <children>
-                        <Label text="Số tiền còn lại">
+                        <Label text="Số tiền đã tiêu">
                            <VBox.margin>
                               <Insets bottom="2.0" />
                            </VBox.margin>
@@ -62,7 +62,7 @@
             </StackPane>
          </children>
       </VBox>
-      <AnchorPane fx:id="blackPane" onMouseClicked="#backToMenu" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: black; visibility: false;" styleClass="blackPane" />
+      <AnchorPane fx:id="blackPane" onMouseClicked="#backToMenu" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: black; visibility: false;" />
       <AnchorPane fx:id="slider" layoutY="211.0" prefHeight="430.0" prefWidth="360.0" />
    </children>
 </AnchorPane>
