@@ -1,9 +1,6 @@
 package com.example.financial;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -30,6 +29,9 @@ import java.util.ResourceBundle;
 
 public class FinancialController implements Initializable {
     @FXML
+    private Label remainMoney;
+
+    @FXML
     private DatePicker datePicker = new DatePicker();
 
     @FXML
@@ -43,6 +45,12 @@ public class FinancialController implements Initializable {
 
     @FXML
     private PieChart pieChart;
+
+    @FXML
+    private AnchorPane slider;
+
+    @FXML
+    private AnchorPane blackPane;
 
     private final List<Type> typeList = new ArrayList<>();
 
@@ -66,6 +74,7 @@ public class FinancialController implements Initializable {
     }
 
     private void setChosenType (Type type) throws IOException {
+        /*
         Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/calculator.fxml")));
         Scene scene = datePicker.getScene();
 
@@ -74,14 +83,66 @@ public class FinancialController implements Initializable {
 
         Timeline timeline = new Timeline();
         KeyValue kv = new KeyValue(newScene.translateYProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.75), kv);
 
         timeline.getKeyFrames().add(kf);
         timeline.play();
+         */
+        blackPane.setVisible(true);
+        FadeTransition fade = new FadeTransition(Duration.seconds(0.5), blackPane);
+        fade.setFromValue(0.0);
+        fade.setToValue(1.0);
+        fade.play();
+
+        blackPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");    // transparent black
+
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.5));
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("View/calculator.fxml"));
+        slider.getChildren().add(fxmlLoader.load());
+
+        slider.setVisible(true);
+        slide.setNode(slider);
+
+        slide.setToY(0);
+        slide.play();
+
+        slider.setTranslateY(430); // height of slider
+    }
+
+    @FXML
+    public void backToMenu(MouseEvent mouseEvent) {
+        FadeTransition fade = new FadeTransition(Duration.seconds(0.5), blackPane);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.play();
+        blackPane.setVisible(false);
+
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(0.5));
+        /*
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("View/calculator.fxml"));
+        slider.getChildren().add(fxmlLoader.load());
+        slider.setVisible(true);
+         */
+
+        //slider.setVisible(false);
+        slide.setNode(slider);
+
+        slide.setToY(430); // height of slider
+        slide.play();
+
+        slider.setTranslateY(0);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        slider.setVisible(false);
+        blackPane.setVisible(false);
+
         // set default date to real time
         datePicker.setValue(LocalDate.now());
 

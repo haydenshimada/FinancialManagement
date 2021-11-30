@@ -36,7 +36,7 @@ public class TypeController {
         this.listener = listener;
 
         typeName.setText(type.getType());
-        typeMoney.setText(Main.CURRENCY + type.getMoney());
+        typeMoney.setText(type.getMoney() + Main.CURRENCY);
         typeButton.setStyle("-fx-background-color:" + type.getButtonColor() + ";");
 
         FileInputStream input = new FileInputStream(type.getImageSource());

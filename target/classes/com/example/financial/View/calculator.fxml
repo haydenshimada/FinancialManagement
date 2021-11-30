@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane prefHeight="377.0" prefWidth="360.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financial.CalculatorController">
+<AnchorPane prefHeight="430.0" prefWidth="360.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financial.CalculatorController">
    <children>
-      <ImageView fitHeight="320.0" fitWidth="239.0" layoutX="60.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/paimon.png" />
-         </image>
-      </ImageView>
+      <Pane layoutX="11.0" layoutY="58.0" prefHeight="62.0" prefWidth="338.0" style="-fx-background-color: white;" />
+      <Pane layoutX="11.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="150.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="218.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="81.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="286.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="11.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="11.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="11.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="81.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="81.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="81.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="150.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="150.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="150.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="218.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="218.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="218.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="286.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="286.0" layoutY="274.0" prefHeight="134.0" prefWidth="60.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>
