@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -22,9 +24,16 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class FinancialController implements Initializable {
+    @FXML
+    private StackPane parentContainer;
+
+    @FXML
+    private AnchorPane anchorPane;
+
     @FXML
     private Label remainMoney;
 
@@ -51,7 +60,8 @@ public class FinancialController implements Initializable {
 
     private final List<Type> typeList = new ArrayList<>();
 
-    private ChooseListener listener;
+    private ChooseListener chooseListener;
+    private AddListener addListener;
 
     private List<Type> getData() {
         List<Type> types = new ArrayList<>();
@@ -64,7 +74,6 @@ public class FinancialController implements Initializable {
         types.add(new Type("Electric", 0, "electric.png", "yellow"));
         types.add(new Type("Transport", 0, "travel.png", "green"));
         types.add(new Type("Internet", 0, "internet.png", "cyan"));
-        types.add(new Type("Health", 0, "health.png", "pink"));
         types.add(new Type("Health", 0, "health.png", "pink"));
 
         return types;
@@ -93,6 +102,7 @@ public class FinancialController implements Initializable {
 
         blackPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");    // transparent black
 
+        slider.setVisible(true);
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.5));
 
@@ -100,7 +110,6 @@ public class FinancialController implements Initializable {
         fxmlLoader.setLocation(getClass().getResource("View/calculator.fxml"));
         slider.getChildren().add(fxmlLoader.load());
 
-        slider.setVisible(true);
         slide.setNode(slider);
 
         slide.setToY(0);
@@ -133,6 +142,27 @@ public class FinancialController implements Initializable {
         slide.play();
 
         slider.setTranslateY(0);
+        slide.setOnFinished(e -> slider.setVisible(false));
+    }
+
+    private void switchToAddScene() throws IOException{
+        Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/newType.fxml")));
+        Scene scene = datePicker.getScene();
+
+        newScene.translateXProperty().set(scene.getWidth());
+        parentContainer.getChildren().add(newScene);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(newScene.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+
+        timeline.getKeyFrames().add(kf);
+
+        timeline.setOnFinished(e -> {
+            parentContainer.getChildren().remove(anchorPane);
+        });
+
+        timeline.play();
     }
 
     @Override
@@ -162,11 +192,22 @@ public class FinancialController implements Initializable {
         // get categories
         typeList.addAll(getData());
 
-        listener = new ChooseListener() {
+        chooseListener = new ChooseListener() {
             @Override
             public void onClicked(Type type) {
                 try {
                     setChosenType(type);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        addListener = new AddListener() {
+            @Override
+            public void clickAdd() {
+                try {
+                    switchToAddScene();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -184,7 +225,7 @@ public class FinancialController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 TypeController typeController = fxmlLoader.getController();
-                typeController.setData(type, listener);
+                typeController.setData(type, chooseListener);
 
                 if (row == 2) {
                     row = 0;
@@ -194,6 +235,26 @@ public class FinancialController implements Initializable {
                 grid.add(anchorPane, column, row++);
                 GridPane.setMargin(anchorPane, new Insets(3, 15,0, 8));
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("View/add.fxml"));
+
+            AnchorPane anchorPane = fxmlLoader.load();
+
+            AddController addController = fxmlLoader.getController();
+            addController.setAddListener(addListener);
+
+            if (row == 2) {
+                row = 0;
+                column++;
+            }
+
+            grid.add(anchorPane, column, row);
+            GridPane.setMargin(anchorPane, new Insets(3, 15,0, 8));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,56 +13,60 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financial.FinancialController">
+<StackPane fx:id="parentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financial.FinancialController">
    <children>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0">
+      <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: white;">
          <children>
-            <HBox alignment="CENTER" prefHeight="115.0" prefWidth="375.0">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="115.0" prefWidth="375.0">
                      <children>
-                        <Label text="Số tiền còn lại">
-                           <VBox.margin>
-                              <Insets bottom="2.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Cambria" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="remainMoney" text="0 ₫">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="3.0" />
-                           </VBox.margin>
-                        </Label>
-                        <DatePicker fx:id="datePicker" editable="false" />
+                        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Số tiền đã tiêu">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="remainMoney" text="0 ₫">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <DatePicker fx:id="datePicker" editable="false" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <StackPane fx:id="stackPane" alignment="BOTTOM_CENTER" prefHeight="523.0" prefWidth="358.0">
-               <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  </HBox>
+                  <StackPane fx:id="stackPane" alignment="BOTTOM_CENTER" prefHeight="523.0" prefWidth="358.0">
                      <children>
-                        <ScrollPane fx:id="scroll" layoutX="5.0" prefHeight="158.0" prefWidth="360.0" vbarPolicy="NEVER">
-                           <content>
-                              <GridPane fx:id="grid">
-                                 <rowConstraints>
-                                    <RowConstraints />
-                                 </rowConstraints>
-                              </GridPane>
-                           </content>
-                        </ScrollPane>
-                        <PieChart fx:id="pieChart" layoutX="9.0" layoutY="158.0" prefHeight="400.0" prefWidth="360.0" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="scroll" layoutX="5.0" prefHeight="158.0" prefWidth="360.0" vbarPolicy="NEVER">
+                                 <content>
+                                    <GridPane fx:id="grid">
+                                       <rowConstraints>
+                                          <RowConstraints />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                              <PieChart fx:id="pieChart" layoutX="9.0" layoutY="158.0" prefHeight="400.0" prefWidth="360.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </AnchorPane>
+                  </StackPane>
                </children>
-            </StackPane>
+            </VBox>
+            <AnchorPane fx:id="blackPane" onMouseClicked="#backToMenu" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: black; visibility: false;" />
+            <AnchorPane fx:id="slider" layoutY="211.0" prefHeight="430.0" prefWidth="360.0" style="visibility: false;" />
          </children>
-      </VBox>
-      <AnchorPane fx:id="blackPane" onMouseClicked="#backToMenu" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: black; visibility: false;" styleClass="blackPane" />
-      <AnchorPane fx:id="slider" layoutY="211.0" prefHeight="430.0" prefWidth="360.0" />
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

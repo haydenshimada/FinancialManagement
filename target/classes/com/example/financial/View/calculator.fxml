@@ -1,29 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="430.0" prefWidth="360.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financial.CalculatorController">
    <children>
-      <Pane layoutX="11.0" layoutY="58.0" prefHeight="62.0" prefWidth="338.0" style="-fx-background-color: white;" />
-      <Pane layoutX="11.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="150.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="218.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="81.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="286.0" layoutY="134.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="11.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="11.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="11.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="81.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="81.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="81.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="150.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="150.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="150.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="218.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="218.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="218.0" layoutY="347.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="286.0" layoutY="204.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;" />
-      <Pane layoutX="286.0" layoutY="274.0" prefHeight="134.0" prefWidth="60.0" style="-fx-background-color: white;" />
+      <Pane layoutX="11.0" layoutY="49.0" prefHeight="71.0" prefWidth="338.0" style="-fx-background-color: white;">
+         <children>
+            <Label fx:id="resultLabel" alignment="CENTER_RIGHT" layoutX="8.0" layoutY="13.0" prefHeight="45.0" prefWidth="323.0" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btnDiv" layoutX="11.0" layoutY="134.0" onMouseClicked="#symbolClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="24.0" layoutY="8.0" text="/" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btn8" layoutX="150.0" layoutY="134.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="21.0" layoutY="8.0" text="8" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btn9" layoutX="218.0" layoutY="134.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="22.0" layoutY="8.0" text="9" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btn7" layoutX="81.0" layoutY="134.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="22.0" layoutY="8.0" text="7" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btnMul" layoutX="11.0" layoutY="204.0" onMouseClicked="#symbolClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="24.0" layoutY="15.0" prefHeight="22.0" prefWidth="13.0" text="*" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btnPlus" layoutX="11.0" layoutY="274.0" onMouseClicked="#symbolClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="20.0" layoutY="8.0" text="+" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btnMinus" layoutX="11.0" layoutY="347.0" onMouseClicked="#symbolClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="24.0" layoutY="8.0" text="-" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btn4" layoutX="81.0" layoutY="204.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="21.0" layoutY="9.0" text="4" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btn1" layoutX="81.0" layoutY="274.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="22.0" layoutY="8.0" text="1" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btn5" layoutX="150.0" layoutY="204.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="21.0" layoutY="7.0" text="5" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btn2" layoutX="150.0" layoutY="274.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="22.0" layoutY="8.0" text="2" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btn0" layoutX="80.0" layoutY="347.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="198.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="91.0" layoutY="8.0" text="0" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btn6" layoutX="218.0" layoutY="204.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="22.0" layoutY="8.0" text="6" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="btn3" layoutX="218.0" layoutY="274.0" onMouseClicked="#numberClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="22.0" layoutY="8.0" text="3" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btnClear" layoutX="286.0" layoutY="134.0" onMouseClicked="#symbolClick" prefHeight="130.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="11.0" layoutY="43.0" text="AC" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btnEqual" layoutX="286.0" layoutY="274.0" onMouseClicked="#symbolClick" prefHeight="134.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="20.0" layoutY="45.0" text="=" textAlignment="RIGHT">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="btnTick" layoutX="286.0" layoutY="274.0" prefHeight="134.0" prefWidth="60.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icon/tick.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

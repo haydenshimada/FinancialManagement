@@ -15,29 +15,27 @@ public class CalculatorController implements Initializable {
     private Label resultLabel;
 
     @FXML
-    private Label equalLabel;
-
+    private Pane btnEqual;
     @FXML
-    private ImageView tickImg;
-
+    private Pane btnTick;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        equalLabel.setVisible(false);
+        btnEqual.setVisible(false);
+        btnTick.setVisible(true);
     }
 
     @FXML
     public void numberClick(MouseEvent mouseEvent) {
-        int value = Integer.parseInt(((Pane)mouseEvent.getSource()).getId().replace("btn", ""));
+        int value = Integer.parseInt(((Pane) mouseEvent.getSource()).getId().replace("btn", ""));
 
         if (resultLabel.getText().equals("Divide by 0 error")) {
-            resultLabel.setText(String.valueOf(0.0));
+            resultLabel.setText("");
         }
 
-        resultLabel.setText(Double.parseDouble(
-                resultLabel.getText()) == 0
-                        ? String.valueOf((double) value)
-                        : String.valueOf(Double.parseDouble(resultLabel.getText()) * 10 + value)
+        resultLabel.setText(resultLabel.getText().equals("")
+                ? String.valueOf((double) value)
+                : String.valueOf(Double.parseDouble(resultLabel.getText()) * 10 + value)
         );
     }
 
@@ -46,40 +44,41 @@ public class CalculatorController implements Initializable {
 
     @FXML
     public void symbolClick(MouseEvent mouseEvent) {
-        String symbol = ((Pane)mouseEvent.getSource()).getId().replace("btn", "");
+        String symbol = ((Pane) mouseEvent.getSource()).getId().replace("btn", "");
         if (symbol.equals("Equal")) {
-            if (equalLabel.isVisible()) {
-                double num2 = Double.parseDouble(resultLabel.getText());
-                switch (operation) {
-                    case "+" -> resultLabel.setText((num1 + num2) + "");
-                    case "-" -> resultLabel.setText((num1 - num2) + "");
-                    case "*" -> resultLabel.setText((num1 * num2) + "");
-                    case "/" -> resultLabel.setText((num1 / num2) + "");
-                }
-                if (resultLabel.getText().equals("Infinity")) {
-                    resultLabel.setText("Divide by 0 error");
-                }
-                operation = ".";
-
-                equalLabel.setVisible(false);
-                tickImg.setVisible(true);
+            double num2 = Double.parseDouble(resultLabel.getText());
+            switch (operation) {
+                case "+" -> resultLabel.setText((num1 + num2) + "");
+                case "-" -> resultLabel.setText((num1 - num2) + "");
+                case "*" -> resultLabel.setText((num1 * num2) + "");
+                case "/" -> resultLabel.setText((num1 / num2) + "");
             }
-        } else if (symbol.equals("Clear")) {    // AC
-            resultLabel.setText(String.valueOf(0.0));
+            if (resultLabel.getText().equals("Infinity")) {
+                resultLabel.setText("Divide by 0 error");
+            }
             operation = ".";
-        }
-        else {    // operation
-            tickImg.setVisible(false);
-            equalLabel.setVisible(true);
 
-            switch (symbol) {
-                case "Plus" -> operation = "+";
-                case "Minus" -> operation = "-";
-                case "Mul" -> operation = "*";
-                case "Div" -> operation = "/";
+            btnTick.setVisible(true);
+            btnEqual.setVisible(false);
+
+        } else if (symbol.equals("Clear")) {    // AC
+            resultLabel.setText("");
+            operation = ".";
+        } else {    // operation
+            if (!resultLabel.getText().equals("")) {
+                btnEqual.setVisible(true);
+                btnTick.setVisible(false);
+
+                switch (symbol) {
+                    case "Plus" -> operation = "+";
+                    case "Minus" -> operation = "-";
+                    case "Mul" -> operation = "*";
+                    case "Div" -> operation = "/";
+                }
+
+                num1 = Double.parseDouble(resultLabel.getText());
+                resultLabel.setText("");
             }
-            num1 = Double.parseDouble(resultLabel.getText());
-            resultLabel.setText(String.valueOf(0.0));
         }
     }
 }
