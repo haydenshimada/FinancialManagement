@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,9 +34,6 @@ public class FinancialController implements Initializable {
 
     @FXML
     private AnchorPane anchorPane;
-
-    @FXML
-    private Label remainMoney;
 
     @FXML
     private DatePicker datePicker = new DatePicker();
@@ -79,21 +77,7 @@ public class FinancialController implements Initializable {
         return types;
     }
 
-    private void setChosenType (Type type) throws IOException {
-        /*
-        Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/calculator.fxml")));
-        Scene scene = datePicker.getScene();
-
-        newScene.translateYProperty().set(scene.getHeight());
-        stackPane.getChildren().add(newScene);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(newScene.translateYProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.75), kv);
-
-        timeline.getKeyFrames().add(kf);
-        timeline.play();
-         */
+    private void setChosenType (Type type) throws IOException { // call calculator
         blackPane.setVisible(true);
         FadeTransition fade = new FadeTransition(Duration.seconds(0.5), blackPane);
         fade.setFromValue(0.0);
@@ -108,14 +92,18 @@ public class FinancialController implements Initializable {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("View/calculator.fxml"));
+
         slider.getChildren().add(fxmlLoader.load());
+
+        CalculatorController controller = fxmlLoader.getController();
+        controller.setData(type);
 
         slide.setNode(slider);
 
         slide.setToY(0);
         slide.play();
 
-        slider.setTranslateY(430); // height of slider
+        slider.setTranslateY(480); // height of slider
     }
 
     @FXML
@@ -128,17 +116,10 @@ public class FinancialController implements Initializable {
 
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.5));
-        /*
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("View/calculator.fxml"));
-        slider.getChildren().add(fxmlLoader.load());
-        slider.setVisible(true);
-         */
 
-        //slider.setVisible(false);
         slide.setNode(slider);
 
-        slide.setToY(430); // height of slider
+        slide.setToY(480); // height of slider
         slide.play();
 
         slider.setTranslateY(0);
@@ -165,12 +146,25 @@ public class FinancialController implements Initializable {
         timeline.play();
     }
 
+    @FXML
+    public void getPreviousDate() {
+        LocalDate date = datePicker.getValue();
+        datePicker.setValue(date.minusDays(1));
+    }
+
+    @FXML
+    public void getNextDate() {
+        LocalDate date = datePicker.getValue();
+        datePicker.setValue(date.plusDays(1));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         slider.setVisible(false);
         blackPane.setVisible(false);
 
         // set default date to real time
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         datePicker.setValue(LocalDate.now());
 
         // pie chart's data

@@ -2,11 +2,15 @@ package com.example.financial;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -80,5 +84,27 @@ public class CalculatorController implements Initializable {
                 resultLabel.setText("");
             }
         }
+    }
+
+    @FXML
+    private Button typeCircle;
+
+    @FXML
+    private Pane typeColor;
+
+    @FXML
+    private ImageView typeImg;
+
+    @FXML
+    private Label typeLabel;
+
+    public void setData(Type type) throws FileNotFoundException {
+        typeLabel.setText(type.getType());
+        typeCircle.setStyle("-fx-background-color: " + type.getButtonColor() + ";"
+                            + "-fx-background-radius: 100");
+        typeColor.setStyle("-fx-background-color: " + type.getButtonColor() + ";");
+
+        FileInputStream input = new FileInputStream(type.getImageSource());
+        typeImg.setImage(new Image(input));
     }
 }

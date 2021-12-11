@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -19,13 +21,13 @@ import java.util.Objects;
 
 public class NewTypeController {
     @FXML
-    private Button backToMainBtn;
+    private ImageView backToMainBtn;
 
     @FXML
     private AnchorPane anchorPane;
 
     @FXML
-    void backToMain(ActionEvent event) throws IOException {
+    void backToMain(MouseEvent mouseEvent) throws IOException {
         Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/hello-view.fxml")));
         Scene scene = backToMainBtn.getScene();
 
