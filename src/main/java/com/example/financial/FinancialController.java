@@ -10,7 +10,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -36,7 +35,9 @@ public class FinancialController implements Initializable {
     private AnchorPane anchorPane;
 
     @FXML
-    private DatePicker datePicker = new DatePicker();
+    private Label dateLabel;
+    private LocalDate date;
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
     @FXML
     private StackPane stackPane = new StackPane();
@@ -128,7 +129,7 @@ public class FinancialController implements Initializable {
 
     private void switchToAddScene() throws IOException{
         Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/newType.fxml")));
-        Scene scene = datePicker.getScene();
+        Scene scene = dateLabel.getScene();
 
         newScene.translateXProperty().set(scene.getWidth());
         parentContainer.getChildren().add(newScene);
@@ -148,14 +149,20 @@ public class FinancialController implements Initializable {
 
     @FXML
     public void getPreviousDate() {
-        LocalDate date = datePicker.getValue();
-        datePicker.setValue(date.minusDays(1));
+        date = date.minusMonths(1);
+        dateLabel.setText(date.format(dateTimeFormatter));
     }
 
     @FXML
     public void getNextDate() {
-        LocalDate date = datePicker.getValue();
-        datePicker.setValue(date.plusDays(1));
+        date = date.plusMonths(1);
+        dateLabel.setText(date.format(dateTimeFormatter));
+    }
+
+    @FXML
+    public void getNowDate() {
+        date = LocalDate.now();
+        dateLabel.setText(date.format(dateTimeFormatter));
     }
 
     @Override
@@ -164,8 +171,8 @@ public class FinancialController implements Initializable {
         blackPane.setVisible(false);
 
         // set default date to real time
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-        datePicker.setValue(LocalDate.now());
+        date = LocalDate.now();
+        dateLabel.setText(date.format(dateTimeFormatter));
 
         // pie chart's data
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
@@ -227,12 +234,13 @@ public class FinancialController implements Initializable {
                 }
 
                 grid.add(anchorPane, column, row++);
-                GridPane.setMargin(anchorPane, new Insets(3, 15,0, 8));
+                GridPane.setMargin(anchorPane, new Insets(3, 15,0, 8)); // top - right - bottom - left
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // add newType button
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("View/add.fxml"));
@@ -248,7 +256,7 @@ public class FinancialController implements Initializable {
             }
 
             grid.add(anchorPane, column, row);
-            GridPane.setMargin(anchorPane, new Insets(3, 15,0, 8));
+            GridPane.setMargin(anchorPane, new Insets(3, 15,0, 8)); // top - right - bottom - left
         } catch (IOException e) {
             e.printStackTrace();
         }

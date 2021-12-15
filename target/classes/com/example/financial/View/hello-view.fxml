@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <StackPane fx:id="parentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.financial.FinancialController">
    <children>
@@ -31,7 +32,20 @@
                            </HBox.margin>
                         </ImageView>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <DatePicker fx:id="datePicker" editable="false" prefHeight="26.0" prefWidth="292.0" />
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="349.0">
+                           <children>
+                              <Label fx:id="dateLabel" alignment="CENTER" contentDisplay="CENTER" text="31-Dec-2021" textAlignment="CENTER" textFill="#fffdfd">
+                                 <font>
+                                    <Font name="Cambria" size="18.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#getNowDate" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/date.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
                         <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#getNextDate" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -169,7 +169,7 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icon/tick.png" />
+                        <Image url="@../Icon/tickBlack.png" />
                      </image>
                   </ImageView>
                </children>
