@@ -4,6 +4,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,12 +12,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -44,6 +45,9 @@ public class NewTypeController implements Initializable {
     @FXML
     private GridPane grid ;
 
+    @FXML
+    private ColorPicker colorPicker;
+
     private final List<Picture> ImageList = new ArrayList<>();
     private List<Picture> getImageSrc() {
         List<Picture> res = new ArrayList<>();
@@ -53,6 +57,23 @@ public class NewTypeController implements Initializable {
         res.add(new Picture("yen.png"));
         res.add(new Picture("c.png"));
         res.add(new Picture("p.png"));
+        res.add(new Picture("mo.png"));
+        res.add(new Picture("currency.png"));
+        res.add(new Picture("bitcoin.png"));
+        res.add(new Picture("date.png"));
+        res.add(new Picture("baby.png"));
+        res.add(new Picture("dog.png"));
+        res.add(new Picture("diamond.png"));
+        res.add(new Picture("bag.png"));
+        res.add(new Picture("ball.png"));
+        res.add(new Picture("movie.png"));
+        res.add(new Picture("bandage.png"));
+        res.add(new Picture("syringe.png"));
+        res.add(new Picture("tooth.png"));
+        res.add(new Picture("salon.png"));
+        res.add(new Picture("clef.png"));
+        res.add(new Picture("guitar.png"));
+        res.add(new Picture("violin.png"));
 
         return res;
     }
@@ -85,11 +106,28 @@ public class NewTypeController implements Initializable {
         previewImg.setImage(new Image(input));
     }
 
+    @FXML
+    public void setPreviewColor(ActionEvent actionEvent) {
+        Color myColor = colorPicker.getValue();
+        previewButton.setStyle(
+                "-fx-background-color: " + toRGBCode(myColor) + ";"
+                + "-fx-background-radius: 100" + ";"
+        );
+
+    }
+
+    private String toRGBCode(Color color)
+    {
+        return String.format( "#%02X%02X%02X",
+                (int)( color.getRed() * 255 ),
+                (int)( color.getGreen() * 255 ),
+                (int)( color.getBlue() * 255 ) );
+    }
+
     private ChoosePicListener choosePicListener;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        grid = new GridPane();
         ImageList.addAll(getImageSrc());
 
         choosePicListener = new ChoosePicListener() {

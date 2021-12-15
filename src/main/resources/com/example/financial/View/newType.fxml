@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -29,21 +30,26 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField layoutX="18.0" layoutY="59.0" prefHeight="26.0" prefWidth="273.0" promptText="Name" />
-      <VBox layoutY="111.0" prefHeight="418.0" prefWidth="360.0" style="-fx-background-color: #2A3139;">
+      <TextField layoutX="18.0" layoutY="56.0" prefHeight="32.0" prefWidth="274.0" promptText="Name" />
+      <VBox alignment="TOP_CENTER" layoutY="111.0" prefHeight="418.0" prefWidth="360.0" style="-fx-background-color: #2A3139;">
          <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="174.0" prefWidth="360.0" style="-fx-background-color: #2A3139;">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="188.0" prefWidth="360.0" style="-fx-background-color: #2A3139;">
                <content>
-                  <GridPane fx:id="ImgList" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2A3139;">
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
+                  <AnchorPane prefHeight="186.0" prefWidth="347.0" style="-fx-background-color: #2A3139;">
+                     <children>
+                        <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2A3139;">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
                </content>
             </ScrollPane>
+            <ColorPicker fx:id="colorPicker" onAction="#setPreviewColor" prefHeight="36.0" prefWidth="173.0" />
          </children>
       </VBox>
-      <Button fx:id="previewButton" layoutX="304.0" layoutY="52.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: orange;">
+      <Button fx:id="previewButton" layoutX="304.0" layoutY="52.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #2A3139; -fx-border-color: #C1C2C4; -fx-border-radius: 100;">
          <graphic>
             <ImageView fx:id="previewImg" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
