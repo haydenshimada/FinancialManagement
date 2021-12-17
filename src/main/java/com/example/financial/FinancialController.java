@@ -150,19 +150,19 @@ public class FinancialController implements Initializable {
     @FXML
     public void getPreviousDate() {
         date = date.minusMonths(1);
-        dateLabel.setText(date.format(dateTimeFormatter));
+        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
     }
 
     @FXML
     public void getNextDate() {
         date = date.plusMonths(1);
-        dateLabel.setText(date.format(dateTimeFormatter));
+        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
     }
 
     @FXML
     public void getNowDate() {
         date = LocalDate.now();
-        dateLabel.setText(date.format(dateTimeFormatter));
+        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
     }
 
     @Override
@@ -172,7 +172,7 @@ public class FinancialController implements Initializable {
 
         // set default date to real time
         date = LocalDate.now();
-        dateLabel.setText(date.format(dateTimeFormatter));
+        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
 
         // pie chart's data
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
