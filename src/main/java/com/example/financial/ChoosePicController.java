@@ -27,7 +27,7 @@ public class ChoosePicController {
         this.pic = pic;
         this.listener = listener;
 
-        FileInputStream input = new FileInputStream(pic.getImgSrc());
+        FileInputStream input = new FileInputStream(pic.getAbsoluteImgSrc());
         img.setImage(new Image(input));
     }
 }

@@ -13,7 +13,7 @@
          <graphic>
             <ImageView fx:id="image" fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Icon/shopping.png" />
+                  <Image url="@../Icon/newType/shopping.png" />
                </image>
             </ImageView>
          </graphic>

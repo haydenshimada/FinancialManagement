@@ -8,7 +8,9 @@ import javafx.scene.image.ImageView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class HistoryTypeController {
     @FXML
@@ -28,12 +30,16 @@ public class HistoryTypeController {
 
     public void setData(History history) throws FileNotFoundException {
         date.setText(history.getDate().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
-        money.setText(history.getType().getMoney() + Main.CURRENCY);
+
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        money.setText(currencyVN.format(history.getType().getMoney()));
+
         typeLabel.setText(history.getType().getType());
 
         button.setStyle("-fx-background-color: " + history.getType().getButtonColor() + ";");
 
-        FileInputStream input = new FileInputStream(history.getType().getImageSource());
+        FileInputStream input = new FileInputStream(history.getType().getAbsoluteImageSource());
         image.setImage(new Image(input));
     }
 }

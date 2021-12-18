@@ -35,7 +35,7 @@ public class EditTypeController {
         label.setText(type.getType());
         button.setStyle("-fx-background-color: " + type.getButtonColor() + ";");
 
-        FileInputStream input = new FileInputStream(type.getImageSource());
+        FileInputStream input = new FileInputStream(type.getAbsoluteImageSource());
         image.setImage(new Image(input));
     }
 }

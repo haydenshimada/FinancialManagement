@@ -9,6 +9,8 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class TypeController {
     @FXML
@@ -36,10 +38,14 @@ public class TypeController {
         this.listener = listener;
 
         typeName.setText(type.getType());
-        typeMoney.setText(type.getMoney() + Main.CURRENCY);
+
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        typeMoney.setText(currencyVN.format(type.getMoney()));
+
         typeButton.setStyle("-fx-background-color:" + type.getButtonColor() + ";");
 
-        FileInputStream input = new FileInputStream(type.getImageSource());
+        FileInputStream input = new FileInputStream(type.getAbsoluteImageSource());
         typeImage.setImage(new Image(input));
     }
 }

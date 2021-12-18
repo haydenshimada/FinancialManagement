@@ -53,7 +53,7 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" />
                </children>
             </HBox>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="562.0" prefWidth="360.0" style="-fx-background-image: #2A3139;">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="562.0" prefWidth="360.0" style="-fx-background-color: #2A3139;">
                <content>
                   <VBox fx:id="vbox" prefHeight="562.0" prefWidth="346.0" style="-fx-background-color: #2A3139;" />
                </content>

@@ -165,7 +165,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnTick" layoutX="286.0" layoutY="274.0" prefHeight="134.0" prefWidth="60.0" style="-fx-background-color: white;">
+            <Pane fx:id="btnTick" layoutX="286.0" layoutY="274.0" onMouseClicked="#symbolClick" prefHeight="134.0" prefWidth="60.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -187,7 +187,7 @@
                <graphic>
                   <ImageView fx:id="typeImg" fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icon/shopping.png" />
+                        <Image url="@../Icon/newType/shopping.png" />
                      </image>
                   </ImageView>
                </graphic>

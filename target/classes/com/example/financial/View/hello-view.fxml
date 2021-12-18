@@ -65,11 +65,15 @@
                            <children>
                               <ScrollPane fx:id="scroll" layoutX="2.0" prefHeight="154.0" prefWidth="360.0" style="-fx-background-color: #2A3139;" vbarPolicy="NEVER">
                                  <content>
-                                    <GridPane fx:id="grid" style="-fx-background-color: #2A3139;">
-                                       <rowConstraints>
-                                          <RowConstraints />
-                                       </rowConstraints>
-                                    </GridPane>
+                                    <AnchorPane prefHeight="154.0" prefWidth="358.0" style="-fx-background-color: #2A3139;">
+                                       <children>
+                                          <GridPane fx:id="grid" style="-fx-background-color: #2A3139;">
+                                             <rowConstraints>
+                                                <RowConstraints />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
                                  </content>
                               </ScrollPane>
                               <PieChart fx:id="pieChart" animated="false" layoutX="2.0" layoutY="159.0" prefHeight="402.0" prefWidth="360.0" style="-fx-legend-visible: false;" stylesheets="@../Style/pieChart.css" />
@@ -79,6 +83,11 @@
                   </StackPane>
                </children>
             </VBox>
+            <ImageView fitHeight="22.0" fitWidth="25.0" layoutX="331.0" layoutY="52.0" onMouseClicked="#reloadData" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icon/reload.png" />
+               </image>
+            </ImageView>
             <ImageView fitHeight="22.0" fitWidth="25.0" layoutX="330.0" layoutY="5.0" onMouseClicked="#switchToEditScene" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/edit.png" />

@@ -1,5 +1,6 @@
 package com.example.financial;
 
+import com.example.financial.SQL.SQL;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -20,6 +21,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -89,29 +91,49 @@ public class EditController implements Initializable {
     @FXML
     public void getPreviousDate() {
         date = date.minusMonths(1);
+        date = date.withDayOfMonth(date.lengthOfMonth());
+
         dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
+
+        loadFXML(date);
     }
 
     @FXML
     public void getNextDate() {
         date = date.plusMonths(1);
-        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
+        date = date.withDayOfMonth(date.lengthOfMonth());
+
+        dateLabel.setText(date.format(dateTimeFormatter));
+
+        loadFXML(date);
     }
 
     @FXML
     public void getNowDate() {
         date = LocalDate.now();
-        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
+        date = date.withDayOfMonth(date.lengthOfMonth());
+
+        dateLabel.setText(date.format(dateTimeFormatter));
+
+        loadFXML(date);
     }
 
     private EditListener editListener;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            sql = new SQL();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         // set default date to real time
         date = LocalDate.now();
-        dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
+        date = date.withDayOfMonth(date.lengthOfMonth());
+        dateLabel.setText(date.format(dateTimeFormatter));
 
+        /*
         typeList.addAll(getData());
         emptyLabel.setVisible(typeList.isEmpty());
 
@@ -124,16 +146,17 @@ public class EditController implements Initializable {
                 }
                 System.out.println();
 
-                /*
+
                 int i = indexOf(typeList, type);
                 if (i != -1) {
                     vbox.getChildren().remove(i);
                 }
-                 */
+
                 vbox.getChildren().clear();
                 loadFXML();
             }
         };
+*/
 /*
         try {
             for (Type type : typeList) {
@@ -152,11 +175,39 @@ public class EditController implements Initializable {
         }
 
  */
-        loadFXML();
+        loadFXML(date);
     }
 
-    private void loadFXML() {
+    private SQL sql;
+
+    private void loadFXML(LocalDate localDate) {
+        //typeList.addAll(getData());
         try {
+            typeList.clear();
+            typeList.addAll(sql.getList(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        emptyLabel.setVisible(typeList.isEmpty());
+
+        editListener = new EditListener() {
+            @Override
+            public void deleteClick(Type type) {
+                typeList.remove(type);
+
+                try {
+                    sql.deleteType(type.getType(), localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                vbox.getChildren().clear();
+                loadFXML(localDate);
+            }
+        };
+
+        try {
+            vbox.getChildren().clear();
             for (Type type : typeList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("View/editType.fxml"));

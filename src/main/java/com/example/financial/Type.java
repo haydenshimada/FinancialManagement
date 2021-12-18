@@ -2,14 +2,14 @@ package com.example.financial;
 
 public class Type {
     private String type;
-    private long money;
+    private int money;
     private String imageSource;
     private String buttonColor;
 
     public Type() {
     }
 
-    public Type(String type, long money, String imageSource, String buttonColor) {
+    public Type(String type, int money, String imageSource, String buttonColor) {
         this.type = type;
         this.money = money;
         this.imageSource = imageSource;
@@ -24,16 +24,20 @@ public class Type {
         this.type = type;
     }
 
-    public long getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(long money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
+    public String getAbsoluteImageSource() {
+        return "src/main/resources/com/example/financial/Icon/newType/" + imageSource;
+    }
+
     public String getImageSource() {
-        return "src/main/resources/com/example/financial/Icon/" + imageSource;
+        return imageSource;
     }
 
     public void setImageSource(String imageSource) {

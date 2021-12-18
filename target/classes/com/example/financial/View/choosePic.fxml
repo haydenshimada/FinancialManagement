@@ -14,7 +14,7 @@
                <graphic>
                   <ImageView fx:id="img" fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icon/shopping.png" />
+                        <Image url="@../Icon/newType/shopping.png" />
                      </image>
                   </ImageView>
                </graphic>

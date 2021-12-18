@@ -1,5 +1,6 @@
 package com.example.financial;
 
+import com.example.financial.SQL.SQL;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -13,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,10 +27,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.*;
 
 public class NewTypeController implements Initializable {
     @FXML
@@ -48,6 +50,14 @@ public class NewTypeController implements Initializable {
     @FXML
     private ColorPicker colorPicker;
 
+    @FXML
+    private TextField typeName;
+
+    @FXML
+    private Label addSuccess;
+
+    private Picture picture;
+
     private final List<Picture> ImageList = new ArrayList<>();
     private List<Picture> getImageSrc() {
         List<Picture> res = new ArrayList<>();
@@ -60,13 +70,19 @@ public class NewTypeController implements Initializable {
         res.add(new Picture("mo.png"));
         res.add(new Picture("currency.png"));
         res.add(new Picture("bitcoin.png"));
-        res.add(new Picture("date.png"));
+        res.add(new Picture("house.png"));
+        res.add(new Picture("shopping.png"));
+        res.add(new Picture("food.png"));
+        res.add(new Picture("water.png"));
+        res.add(new Picture("internet.png"));
         res.add(new Picture("baby.png"));
         res.add(new Picture("dog.png"));
+        res.add(new Picture("travel.png"));
         res.add(new Picture("diamond.png"));
         res.add(new Picture("bag.png"));
         res.add(new Picture("ball.png"));
         res.add(new Picture("movie.png"));
+        res.add(new Picture("health.png"));
         res.add(new Picture("bandage.png"));
         res.add(new Picture("syringe.png"));
         res.add(new Picture("tooth.png"));
@@ -102,7 +118,8 @@ public class NewTypeController implements Initializable {
     }
 
     private void setPreviewImg(Picture pic) throws FileNotFoundException {
-        FileInputStream input = new FileInputStream(pic.getImgSrc());
+        picture = pic;
+        FileInputStream input = new FileInputStream(pic.getAbsoluteImgSrc());
         previewImg.setImage(new Image(input));
     }
 
@@ -124,10 +141,27 @@ public class NewTypeController implements Initializable {
                 (int)( color.getBlue() * 255 ) );
     }
 
+    @FXML
+    public void tickClick() {
+        try {
+            SQL sql = new SQL();
+            LocalDate date = FinancialController.saveDate;
+            sql.addType(typeName.getText(), 0,
+                    picture.getImgSrc(),
+                    toRGBCode(colorPicker.getValue()),
+                    date.getYear(), date.getMonthValue(), date.getDayOfMonth());
+            addSuccess.setVisible(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private ChoosePicListener choosePicListener;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        addSuccess.setVisible(false);
+
         ImageList.addAll(getImageSrc());
 
         choosePicListener = new ChoosePicListener() {
@@ -155,7 +189,7 @@ public class NewTypeController implements Initializable {
                 ChoosePicController controller = fxmlLoader.getController();
                 controller.setPic(i, choosePicListener);
 
-                if (column == 6) {
+                if (column == 5) {
                     row++;
                     column = 0;
                 }

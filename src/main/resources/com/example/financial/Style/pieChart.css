@@ -5,4 +5,6 @@
 
 .chart-title {
     -fx-text-fill: white;
+    -fx-content-display: center;
+    -fx-alignment: center;
 }
