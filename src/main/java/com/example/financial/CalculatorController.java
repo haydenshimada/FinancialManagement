@@ -20,6 +20,7 @@ public class CalculatorController implements Initializable {
 
     @FXML
     private Pane btnEqual;
+
     @FXML
     private Pane btnTick;
 
@@ -107,4 +108,5 @@ public class CalculatorController implements Initializable {
         FileInputStream input = new FileInputStream(type.getImageSource());
         typeImg.setImage(new Image(input));
     }
+
 }

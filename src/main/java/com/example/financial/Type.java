@@ -47,4 +47,11 @@ public class Type {
     public void setButtonColor(String buttonColor) {
         this.buttonColor = buttonColor;
     }
+
+    public boolean equal(Type type) {
+        return this.type.equals(type.getType())
+                && this.buttonColor.equals(type.getButtonColor())
+                && this.money == type.getMoney()
+                && this.imageSource.equals(type.getImageSource());
+    }
 }

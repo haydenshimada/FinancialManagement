@@ -1,0 +1,8 @@
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-size: 1em;
+}
+
+.chart-title {
+    -fx-text-fill: white;
+}

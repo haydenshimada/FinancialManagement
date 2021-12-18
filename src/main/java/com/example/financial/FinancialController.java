@@ -1,5 +1,6 @@
 package com.example.financial;
 
+import com.example.financial.SQL.SQL;
 import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class FinancialController implements Initializable {
     @FXML
     private Label dateLabel;
     private LocalDate date;
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
     @FXML
     private StackPane stackPane = new StackPane();
@@ -61,6 +63,8 @@ public class FinancialController implements Initializable {
 
     private ChooseListener chooseListener;
     private AddListener addListener;
+
+    private SQL sql;
 
     private List<Type> getData() {
         List<Type> types = new ArrayList<>();
@@ -148,6 +152,48 @@ public class FinancialController implements Initializable {
     }
 
     @FXML
+    public void switchToEditScene() throws IOException {
+        Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/edit.fxml")));
+        Scene scene = dateLabel.getScene();
+
+        newScene.translateXProperty().set(-scene.getWidth());
+        parentContainer.getChildren().add(newScene);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(newScene.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+
+        timeline.getKeyFrames().add(kf);
+
+        timeline.setOnFinished(e -> {
+            parentContainer.getChildren().remove(anchorPane);
+        });
+
+        timeline.play();
+    }
+
+    @FXML
+    public void switchToHistoryScene() throws IOException {
+        Parent newScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("View/history.fxml")));
+        Scene scene = dateLabel.getScene();
+
+        newScene.translateXProperty().set(-scene.getWidth());
+        parentContainer.getChildren().add(newScene);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(newScene.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.5), kv);
+
+        timeline.getKeyFrames().add(kf);
+
+        timeline.setOnFinished(e -> {
+            parentContainer.getChildren().remove(anchorPane);
+        });
+
+        timeline.play();
+    }
+
+    @FXML
     public void getPreviousDate() {
         date = date.minusMonths(1);
         dateLabel.setText(date.withDayOfMonth(date.lengthOfMonth()).format(dateTimeFormatter));
@@ -167,6 +213,13 @@ public class FinancialController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            sql = new SQL();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         slider.setVisible(false);
         blackPane.setVisible(false);
 
@@ -176,19 +229,27 @@ public class FinancialController implements Initializable {
 
         // pie chart's data
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                new PieChart.Data("House", 50),
+                new PieChart.Data("House", 10),
                 new PieChart.Data("Shopping", 30),
-                new PieChart.Data("Food", 25),
-                new PieChart.Data("Water", 10),
-                new PieChart.Data("Electric", 43),
-                new PieChart.Data("Transport", 86),
-                new PieChart.Data("Internet", 90),
-                new PieChart.Data("Health", 5)
+                new PieChart.Data("Food", 40),
+                new PieChart.Data("Water", 50),
+                new PieChart.Data("Electric", 60),
+                new PieChart.Data("Transport", 70),
+                new PieChart.Data("Internet", 20),
+                new PieChart.Data("Health", 60)
         );
 
         // get pie chart data
         pieChart.getData().addAll(pieData);
         pieChart.setTitle("Financial");
+
+        // set pie chart color
+
+        int i = 0;
+        for (PieChart.Data data : pieData) {
+            data.getNode().setStyle("-fx-pie-color:" + getData().get(i++ % getData().size()).getButtonColor() + ";");
+        }
+
 
         // get categories
         typeList.addAll(getData());
