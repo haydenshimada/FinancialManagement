@@ -130,8 +130,8 @@ public class CalculatorController implements Initializable {
                 + "-fx-background-radius: 100");
         typeColor.setStyle("-fx-background-color: " + type.getButtonColor() + ";");
 
-        imgeSrc = type.getImageSource();
-        FileInputStream input = new FileInputStream(type.getImageSource());
+        imgeSrc = type.getAbsoluteImageSource();
+        FileInputStream input = new FileInputStream(imgeSrc);
         typeImg.setImage(new Image(input));
     }
 }
